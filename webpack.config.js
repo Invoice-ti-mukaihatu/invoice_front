@@ -24,7 +24,9 @@ module.exports = {
     devServer: {
         static: {
             directory: path.join(__dirname, "dist"),
-        },
+            },
+        //URL直書きでージ遷移するのに必須
+        historyApiFallback: true,
         port: 4000,
     },
     // importの際に「extensions」の拡張子を省略する

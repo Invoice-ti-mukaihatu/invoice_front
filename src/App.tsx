@@ -1,71 +1,47 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
-import { TestPage } from "./test";
+import { BrowserRouter, Link, Route, Routes, useLocation } from "react-router-dom";
+import { Test } from "./pages/test";
+import { Unko } from "./pages/unko";
+import { Home } from "./pages/home";
+import { TestUser } from "./pages/testUser";
 
 export const App = () => {
-    // User型の配列と、その状態を管理するためのuseStateフックを定義
-    const [users, setUsers] = useState<User[]>([]);
-    // TestPageコンポーネントの表示状態を管理するためのuseStateフックを定義
-    const [testPage, setTestPage] = useState(false);
-
-    // User型のインターフェースを定義
-    interface User {
-        id: number;
-        name: string;
-        mail: string;
-    }
-
-    //ボタンクリック時の処理を定義する関数
-    const handleButtonClick = () => {
-        // バックエンドのAPIエンドポイントからユーザー情報を取得するためのfetchリクエストを送信する
-        fetch("http://localhost:3000/api/users")
-            // レスポンスをJSON形式に変換
-            .then(response => response.json())
-            // 取得したユーザー情報をusersの状態にセット
-            .then(data => setUsers(data))
-            // エラーハンドリング
-            .catch(error => console.error(error));
-    };
-
-    //ボタンクリック時の処理を定義する関数
-    const testButtonClick = () => {
-        // TestPageの表示をtrueにする
-        // if (testPage == false) {
-        //     setTestPage(true);
-        // }else{
-        //     setTestPage(false);
-        // }
-        setTestPage(!testPage);
-    };
-
     return (
-        <div>
-            <h1>請求書アプリ</h1>
-            <p>フロント</p>
-            <a href="https://www.yahoo.co.jp/">Yahooへ遷移</a>
-            <br />
+        <BrowserRouter>
+            {/* <NavigationLinks /> */}
 
-            <button onClick={testButtonClick}>testファイルを{testPage ? "非表示" : "表示"}にする</button>
-            <br />
-            {testPage && <TestPage />}
-            <br />
-
-            {/*  */}
-            <button onClick={handleButtonClick}>ユーザー情報を取得</button>
-            {/* ボタンクリックでDBからレコード取得 */}
-            {users.length > 0 ? (
-                <ul>
-                    {/* 取得した情報を表示 */}
-                    {users.map(user => (
-                        <li key={user.id}>
-                            名前:{user.name} <br />
-                            メールアドレス:{user.mail}
-                        </li>
-                    ))}
-                </ul>
-            ) : (
-                <p>ユーザー情報がありません。</p>
-            )}
-        </div>
+            <Routes>
+                <Route path="/" Component={Home} />
+                <Route path="/test" Component={Test} />
+                <Route path="/unko" Component={Unko} />
+                <Route path="/testUser" Component={TestUser} />
+            </Routes>
+        </BrowserRouter>
     );
 };
+
+// const NavigationLinks = () => {
+//     const location = useLocation();
+
+//     return (
+//         <div>
+//             {location.pathname !== "/test" && (
+//                 <Link to="/test">
+//                     <button>testページへ</button>
+//                 </Link>
+//             )}
+//             <br />
+//             {location.pathname !== "/unko" && (
+//                 <Link to="/unko">
+//                     unkoページへ
+//                 </Link>
+//             )}
+//             <br />
+//             {location.pathname !== "/testUser" && (
+//                 <Link to="/testUser">
+//                     testUserページへ
+//                 </Link>
+//             )}
+//         </div>
+//     );
+// };
