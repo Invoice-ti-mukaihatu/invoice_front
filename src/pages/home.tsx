@@ -1,16 +1,17 @@
 import React from "react";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 
-
 export const Home = () => {
-    return (
-        <div>
-            <h1>homeファイル画面</h1>
-            <Link to="/test"><button>testページへ</button></Link>
-            <br />
-            <Link to="/unko">unkoページへ</Link>
-            <br />
-            <Link to="/testUser">testUserページへ</Link>
-        </div>
-    );
+  return (
+    <div>
+      <h1>homeファイル画面</h1>
+      <Link to="/test">
+        <button>testページへ</button>
+      </Link>
+      <br />
+      <Link to="/unko">unkoページへ</Link>
+      <br />
+      <Link to="/testUser">testUserページへ</Link>
+    </div>
+  );
 };

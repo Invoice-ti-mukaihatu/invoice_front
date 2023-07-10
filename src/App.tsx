@@ -6,18 +6,18 @@ import { Home } from "./pages/home";
 import { TestUser } from "./pages/testUser";
 
 export const App = () => {
-    return (
-        <BrowserRouter>
-            {/* <NavigationLinks /> */}
+  return (
+    <BrowserRouter>
+      {/* <NavigationLinks /> */}
 
-            <Routes>
-                <Route path="/" Component={Home} />
-                <Route path="/test" Component={Test} />
-                <Route path="/unko" Component={Unko} />
-                <Route path="/testUser" Component={TestUser} />
-            </Routes>
-        </BrowserRouter>
-    );
+      <Routes>
+        <Route path="/" Component={Home} />
+        <Route path="/test" Component={Test} />
+        <Route path="/unko" Component={Unko} />
+        <Route path="/testUser" Component={TestUser} />
+      </Routes>
+    </BrowserRouter>
+  );
 };
 
 // const NavigationLinks = () => {
