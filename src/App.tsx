@@ -3,14 +3,25 @@ import { BrowserRouter, Link, Route, Routes, useLocation } from "react-router-do
 import { Test } from "./pages/test";
 import { Unko } from "./pages/unko";
 import { Home } from "./pages/home";
+// import { Login } from "./pages/Login";
 import { TestUser } from "./pages/testUser";
 
 export const App = () => {
+  // export const App: React.FC = () => {
+  // const handleLogin = (mail: string, password: string) => {
+  //   console.log('ログインされたメールアドレス:', mail, 'とパスワード:', password);
+  // };
+
   return (
+    //   <div>
+    //     <Login onSubmit={handleLogin} />
+    //   </div>
+    // );
     <BrowserRouter>
       {/* <NavigationLinks /> */}
 
       <Routes>
+        {/* <Route path="/" Component={Login} /> */}
         <Route path="/" Component={Home} />
         <Route path="/test" Component={Test} />
         <Route path="/unko" Component={Unko} />

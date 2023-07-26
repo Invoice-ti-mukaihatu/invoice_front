@@ -7,7 +7,7 @@ module.exports = {
     entry: "./src/index.tsx",
     // バンドル後のファイルの出力設定
     output: {
-        //  ファイルのの出力先のディレクトリを指定する
+        // ファイルの出力先のディレクトリを指定する
         path: path.join(__dirname, "dist"),
         // 出力されるファイル名
         filename: "main.js",
@@ -15,17 +15,22 @@ module.exports = {
     module: {
         rules: [
             {
-                // 「test」で指定した拡張子をコンパイルする
+                // TypeScriptファイルのコンパイルにts-loaderを使用
                 test: /\.tsx?$/,
                 use: "ts-loader",
+            },
+            {
+                // CSSファイルの読み込みにstyle-loaderとcss-loaderを使用
+                test: /\.css$/,
+                use: ["style-loader", "css-loader"],
             },
         ],
     },
     devServer: {
         static: {
             directory: path.join(__dirname, "dist"),
-            },
-        //URL直書きでージ遷移するのに必須
+        },
+        // URL直書きでページ遷移するのに必須
         historyApiFallback: true,
         port: 4000,
     },

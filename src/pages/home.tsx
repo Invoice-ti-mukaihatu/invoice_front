@@ -1,4 +1,6 @@
+
 import React from "react";
+import './home.css';
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 
 export const Home = () => {

@@ -17,7 +17,7 @@ export const TestUser = () => {
   }
 
   //ボタンクリック時の処理を定義する関数
-  const handleButtonClick = () => {
+  const handleButtonClick = async () => {
     // // バックエンドのAPIエンドポイントからユーザー情報を取得するためのfetchリクエストを送信する
     // fetch("http://localhost:3000/api/users")
     //     // レスポンスをJSON形式に変換
@@ -27,14 +27,16 @@ export const TestUser = () => {
     //     // エラーハンドリング
     //     .catch(error => console.error(error));
 
-    axios
-      .get("http://localhost:3000/api/users/")
-      .then((response) => {
-        setUsers(response.data); // 既に JSON 形式に変換されている
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    // axios
+    //   .get("http://localhost:3000/users/")
+    //   .then((response) => {
+    //     setUsers(response.data); // 既に JSON 形式に変換されている
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
+    const hoge = await axios.get("http://localhost:3000/users/");
+    setUsers(hoge.data);
   };
 
   //ボタンクリック時の処理を定義する関数
