@@ -1,8 +1,7 @@
 import './Login.css';
 import React, { useState } from "react";
-import { User } from "../models/User";
 import axios from "axios";
-import { BrowserRouter, Link, Route, Routes, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Login: React.FC = () => {
     const [email, setEmail] = useState("");
