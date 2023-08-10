@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Login } from "./pages/Login";
-import { Main } from "./pages/Main";
+import { Login } from "./pages/login/Login";
+import { Main } from "./pages/main/Main";
 import axios from "axios";
 
 export const App = () => {
