@@ -4,28 +4,23 @@ import { Test } from "./pages/test";
 import { Unko } from "./pages/unko";
 import { Home } from "./pages/home";
 import { Login } from "./pages/Login";
+import { Main } from "./pages/Main";
+
 // import Login from './pages/Login';
 import './pages/Login.css';
 import { TestUser } from "./pages/testUser";
+import axios from "axios";
 
 export const App = () => {
-  // export const App: React.FC = () => {
-  //   const handleLogin = (mail: string, password: string) => {
-  //     console.log('ログインされたメールアドレス:', mail, 'とパスワード:', password);
-  //   };
+  axios.defaults.withCredentials = true;
 
   return (
 
     <BrowserRouter>
-      {/* <div>
-        <Login onSubmit={handleLogin} />
-      </div> */}
-
-      {/* <NavigationLinks /> */}
-
       <Routes>
         <Route path="/" Component={Login} />
         {/* <Route path="/" Component={Home} /> */}
+        <Route path="/main" Component={Main} />
         <Route path="/test" Component={Test} />
         <Route path="/unko" Component={Unko} />
         <Route path="/testUser" Component={TestUser} />
@@ -33,29 +28,3 @@ export const App = () => {
     </BrowserRouter>
   );
 };
-
-// const NavigationLinks = () => {
-//     const location = useLocation();
-
-//     return (
-//         <div>
-//             {location.pathname !== "/test" && (
-//                 <Link to="/test">
-//                     <button>testページへ</button>
-//                 </Link>
-//             )}
-//             <br />
-//             {location.pathname !== "/unko" && (
-//                 <Link to="/unko">
-//                     unkoページへ
-//                 </Link>
-//             )}
-//             <br />
-//             {location.pathname !== "/testUser" && (
-//                 <Link to="/testUser">
-//                     testUserページへ
-//                 </Link>
-//             )}
-//         </div>
-//     );
-// };
