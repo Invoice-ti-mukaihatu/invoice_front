@@ -10,6 +10,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@main  # リポジトリをチェックアウト
 
+      - name: Prepare environment variables # 環境変数をセット
+        run: |
+          cat <<EOF > src/utilis/config.ts
+          export const BACKEND_BASE_URL = "${{ secrets.BACKEND_BASE_URL }}"
+          EOF
+
       - name: Install Dependencies
         run: npm install
 
