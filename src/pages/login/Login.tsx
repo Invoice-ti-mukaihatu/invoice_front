@@ -2,14 +2,13 @@ import "./Login.css";
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { BACKEND_BASE_URL } from "../../utilis/config";
 
 export const Login: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
-
-  const { MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PASS, MYSQL_DB, JWT_SECRET_KEY } = process.env;
 
   const handleLogin = async () => {
     try {
@@ -27,7 +26,7 @@ export const Login: React.FC = () => {
 
   return (
     <div>
-      <h1>{MYSQL_HOST}</h1>
+      <h1>{BACKEND_BASE_URL}</h1>
       <input
         type="email"
         value={email}

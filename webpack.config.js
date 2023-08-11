@@ -1,7 +1,4 @@
 const path = require("path");
-const dotenv = require("dotenv");
-const env = dotenv.config().parsed;
-const webpack = require("webpack");
 
 module.exports = {
   // 開発用の設定
@@ -41,10 +38,4 @@ module.exports = {
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".json"],
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      "process.env": JSON.stringify(env),
-    }),
-    ,
-  ],
 };
