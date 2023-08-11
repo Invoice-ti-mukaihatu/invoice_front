@@ -3,9 +3,11 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Login } from "./pages/login/Login";
 import { Main } from "./pages/main/Main";
 import axios from "axios";
+import { BACKEND_BASE_URL } from "./utilis/config";
 
 export const App = () => {
   axios.defaults.withCredentials = true;
+  axios.defaults.baseURL = BACKEND_BASE_URL;
 
   return (
     <BrowserRouter>

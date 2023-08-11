@@ -2,7 +2,6 @@ import "./Login.css";
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { BACKEND_BASE_URL } from "../../utilis/config";
 
 export const Login: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -13,7 +12,7 @@ export const Login: React.FC = () => {
   const handleLogin = async () => {
     try {
       // ログイン情報を送信し、レスポンスを受け取る
-      const response = await axios.post("http://localhost:3000/login", { email, password });
+      const response = await axios.post("/login", { email, password });
       // ログインボタンがクリックされたときの処理
       navigate("/main");
       // 受け取ったトークンをコンソールに表示
@@ -26,7 +25,7 @@ export const Login: React.FC = () => {
 
   return (
     <div>
-      <h1>{BACKEND_BASE_URL}</h1>
+      <h1>-ログイン-</h1>
       <input
         type="email"
         value={email}
