@@ -1,0 +1,30 @@
+name: Build React on S3
+on:
+  pull_request:
+    branches: [main]
+    types: [closed]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main  # リポジトリをチェックアウト
+
+      - name: Prepare environment variables # 環境変数をセット
+        run: |
+          cat <<EOF > src/utilis/config.ts
+          export const BACKEND_BASE_URL = "${{ secrets.BACKEND_BASE_URL }}"
+          EOF
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build  # React ビルド
+
+      - name: Deploy  # S3にデプロイ 
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |  # S3のバケットにデプロイ
+          aws s3 cp --recursive --region ap-northeast-1 dist s3://invoice-front
