@@ -1,7 +1,10 @@
 import * as React from "react";
 import { Box, Button, Container, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export const Menu: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <Container maxWidth="xs">
       <Box
@@ -15,6 +18,9 @@ export const Menu: React.FC = () => {
         <Typography component="h1" variant="h4">
           - メニュー -
         </Typography>
+
+        {/* 後で削除すること！！！ */}
+        <Button onClick={() => navigate("/user_edit")}>ユーザー情報の編集</Button>
 
         <Box sx={{ mt: 5 }}>
           <Button color="success" fullWidth variant="contained" sx={{ mt: 3, mb: 2, p: 2 }}>
