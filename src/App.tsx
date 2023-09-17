@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Login } from "./pages/login/Login";
-import { Main } from "./pages/main/Main";
 import axios from "axios";
 import { BACKEND_BASE_URL } from "./env";
+import { Menu } from "./pages/menu/Menu";
 
 export const App = () => {
   axios.defaults.withCredentials = true;
@@ -13,7 +13,7 @@ export const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" Component={Login} />
-        <Route path="/main" Component={Main} />
+        <Route path="/menu" Component={Menu} />
       </Routes>
     </BrowserRouter>
   );
