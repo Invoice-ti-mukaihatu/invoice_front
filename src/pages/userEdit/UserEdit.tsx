@@ -1,10 +1,32 @@
 import * as React from "react";
+import { useEffect, useState } from "react";
 import { Box, Button, Container, Grid, TextField, Typography } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import { User, initUser } from "../../models/User";
+import axios from "axios";
 
 export const UserEdit: React.FC = () => {
   const navigate = useNavigate();
+  const [user, setUser] = useState<User>(initUser);
+  const updateUser = async () => {
+    console.log(user);
+    axios
+      .put<string>(`/users`, user)
+      .catch((e) => {
+        console.log(e);
+      })
+      .then((res) => {
+        console.log(res);
+      });
+  };
+
+  useEffect(() => {
+    (async () => {
+      const user = await axios.get<User>(`/users/me`);
+      setUser(user.data);
+    })();
+  }, [setUser]);
   return (
     <Container fixed>
       <Box
@@ -58,7 +80,8 @@ export const UserEdit: React.FC = () => {
                       label="メールアドレス"
                       id="outlined-size-normal"
                       placeholder="test@example.com"
-                      defaultValue={"test@example.com"}
+                      value={user.email}
+                      onChange={(e) => setUser({ ...user, email: e.target.value })}
                       fullWidth
                     />
                   </Grid>
@@ -69,7 +92,8 @@ export const UserEdit: React.FC = () => {
                       label="ユーザー名"
                       id="outlined-size-normal"
                       placeholder="test_user"
-                      defaultValue={"test_user"}
+                      value={user.username}
+                      onChange={(e) => setUser({ ...user, username: e.target.value })}
                       fullWidth
                     />
                   </Grid>
@@ -80,7 +104,8 @@ export const UserEdit: React.FC = () => {
                       label="氏名"
                       id="outlined-size-normal"
                       placeholder="山田 太郎"
-                      defaultValue={"山田 太郎"}
+                      value={user.name}
+                      onChange={(e) => setUser({ ...user, name: e.target.value })}
                       fullWidth
                     />
                   </Grid>
@@ -91,13 +116,14 @@ export const UserEdit: React.FC = () => {
                       label="住所"
                       id="outlined-size-normal"
                       placeholder="東京都千代田区丸の内1-8-3"
-                      defaultValue={"東京都千代田区丸の内1-8-3"}
+                      value={user.address}
+                      onChange={(e) => setUser({ ...user, address: e.target.value })}
                       fullWidth
                     />
                   </Grid>
                   <Grid item xs={4}></Grid>
                   <Grid item xs={8} mt={5}>
-                    <Button color="success" fullWidth variant="contained">
+                    <Button color="success" fullWidth variant="contained" onClick={updateUser}>
                       更新
                     </Button>
                   </Grid>
