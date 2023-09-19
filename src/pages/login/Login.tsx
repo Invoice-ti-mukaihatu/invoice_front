@@ -1,7 +1,8 @@
 import "./Login.css";
 import React, { useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Box, Button, Container, Grid, TextField, Typography } from "@mui/material";
 
 export const Login: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -14,7 +15,7 @@ export const Login: React.FC = () => {
       // ログイン情報を送信し、レスポンスを受け取る
       const response = await axios.post("/login", { email, password });
       // ログインボタンがクリックされたときの処理
-      navigate("/main");
+      navigate("/menu");
       // 受け取ったトークンをコンソールに表示
       console.log("トークン: ", response.data.token);
     } catch (error) {
@@ -24,29 +25,68 @@ export const Login: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>-ログイン-</h1>
-      <input
-        type="email"
-        value={email}
-        placeholder="メールアドレスを入力"
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <br />
-      <input
-        type="password"
-        value={password}
-        placeholder="パスワードを入力"
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={handleLogin}>ログイン</button>
+    <Container fixed>
+      <Box
+        sx={{
+          marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Typography component="h1" variant="h4">
+          - ログイン -
+        </Typography>
 
-      <label>
-        登録まだの方はこちら
-        <Link to="/CreateUser">
-          <button className="createUser">新規登録</button>
-        </Link>
-      </label>
-    </div>
+        <Grid item xs={9.5}>
+          <Grid
+            mt={10}
+            container
+            padding={"10% 5% 10% 5%"}
+            sx={{
+              backgroundColor: "F1F1F4",
+              border: "D8D8DB",
+              borderRadius: "10%",
+            }}
+          >
+            <Grid container spacing={4}>
+              <Grid item xs={3}></Grid>
+              <Grid item xs={6}>
+                <TextField
+                  required
+                  label="メールアドレス"
+                  id="outlined-size-normal"
+                  placeholder="test@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={3}></Grid>
+              <Grid item xs={3}></Grid>
+              <Grid item xs={6}>
+                <TextField
+                  required
+                  label="パスワード"
+                  id="outlined-size-normal"
+                  placeholder="test@example.com"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={3}></Grid>
+              <Grid item xs={3}></Grid>
+              <Grid item xs={6} mt={5}>
+                <Button color="success" fullWidth variant="contained" onClick={handleLogin}>
+                  ログイン
+                </Button>
+              </Grid>
+              <Grid item xs={3}></Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Box>
+    </Container>
   );
 };
