@@ -9,7 +9,7 @@ import { PasswordEdit } from "./pages/passwordEdit/PasswordEdit";
 
 export const App = () => {
   axios.defaults.withCredentials = true;
-  axios.defaults.baseURL = BACKEND_BASE_URL;
+  axios.defaults.baseURL = `${BACKEND_BASE_URL}/api`;
 
   return (
     <BrowserRouter>
