@@ -1,4 +1,3 @@
-import "./Login.css";
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -69,7 +68,7 @@ export const Login: React.FC = () => {
                   required
                   label="パスワード"
                   id="outlined-size-normal"
-                  placeholder="test@example.com"
+                  type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   fullWidth
