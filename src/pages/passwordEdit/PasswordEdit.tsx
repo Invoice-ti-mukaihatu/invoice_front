@@ -1,9 +1,29 @@
-import * as React from "react";
+import React from "react";
 import { Box, Button, Container, Grid, TextField, Typography } from "@mui/material";
-import { AccountCircle } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 
 export const PasswordEdit: React.FC = () => {
+  const [oldPassword, setOldPassword] = useState<string>("");
+  const [newPassword, setNewPassword] = useState<string>("");
+  const [checkPassword, setCheckPassword] = useState<string>("");
+  const updatePassword = async () => {
+    if (newPassword === checkPassword) {
+      console.log("OK");
+    } else {
+      console.log("NG");
+    }
+    axios
+      .put<string>(`/users/password`, { oldPassword, newPassword })
+      .catch((e) => {
+        console.log(e);
+      })
+      .then(() => {
+        navigate("/menu");
+      });
+  };
+
   const navigate = useNavigate();
   return (
     <Container fixed>
@@ -48,10 +68,25 @@ export const PasswordEdit: React.FC = () => {
                   <Grid item xs={6}>
                     <TextField
                       required
-                      label="パスワード"
+                      label="現在のパスワード"
                       id="outlined-size-normal"
                       type="password"
                       fullWidth
+                      value={oldPassword}
+                      onChange={(e) => setOldPassword(e.target.value)}
+                    />
+                  </Grid>
+                  <Grid item xs={3}></Grid>
+                  <Grid item xs={3}></Grid>
+                  <Grid item xs={6}>
+                    <TextField
+                      required
+                      label="新しいパスワード"
+                      id="outlined-size-normal"
+                      type="password"
+                      fullWidth
+                      value={newPassword}
+                      onChange={(e) => setNewPassword(e.target.value)}
                     />
                   </Grid>
                   <Grid item xs={3}></Grid>
@@ -63,12 +98,14 @@ export const PasswordEdit: React.FC = () => {
                       id="outlined-size-normal"
                       type="password"
                       fullWidth
+                      value={checkPassword}
+                      onChange={(e) => setCheckPassword(e.target.value)}
                     />
                   </Grid>
                   <Grid item xs={3}></Grid>
                   <Grid item xs={3}></Grid>
                   <Grid item xs={6} mt={5}>
-                    <Button color="success" fullWidth variant="contained">
+                    <Button color="success" fullWidth variant="contained" onClick={updatePassword}>
                       更新
                     </Button>
                   </Grid>

@@ -10,9 +10,14 @@ export const UserEdit: React.FC = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<User>(initUser);
   const updateUser = async () => {
-    axios.put<string>(`/users`, user).catch((e) => {
-      console.log(e);
-    });
+    axios
+      .put<string>(`/users`, user)
+      .catch((e) => {
+        console.log(e);
+      })
+      .then(() => {
+        navigate("/menu");
+      });
   };
 
   useEffect(() => {
