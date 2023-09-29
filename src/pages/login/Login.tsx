@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Box, Button, Container, Grid, TextField, Typography } from "@mui/material";
+import { invoice_token_key } from "../../utils/auth";
 
 export const Login: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -10,17 +11,18 @@ export const Login: React.FC = () => {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    try {
-      // ログイン情報を送信し、レスポンスを受け取る
-      const response = await axios.post("/login", { email, password });
-      // ログインボタンがクリックされたときの処理
-      navigate("/menu");
-      // 受け取ったトークンをコンソールに表示
-      console.log("トークン: ", response.data.token);
-    } catch (error) {
-      // エラーハンドリング：ログインエラー時の処理
-      console.error("ログインエラー:", error);
-    }
+    // ログイン情報を送信し、レスポンスを受け取る
+    await axios.post<string>("/login", { email, password })
+      .then((response) => {
+        //cookieにトークンを保存
+        document.cookie = `${invoice_token_key}=${response.data}`;
+        // ログインボタンがクリックされたときの処理
+        navigate("/menu");
+      })
+      .catch((error) => {
+        // エラーハンドリング：ログインエラー時の処理
+        console.error("ログインエラー:", error);
+      });
   };
 
   return (
