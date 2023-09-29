@@ -11,17 +11,17 @@ export const PasswordEdit: React.FC = () => {
   const updatePassword = async () => {
     if (newPassword === checkPassword) {
       console.log("OK");
+      axios
+        .put<string>(`/users/password`, { oldPassword, newPassword })
+        .catch((e) => {
+          console.log(e);
+        })
+        .then(() => {
+          navigate("/menu");
+        });
     } else {
       console.log("NG");
     }
-    axios
-      .put<string>(`/users/password`, { oldPassword, newPassword })
-      .catch((e) => {
-        console.log(e);
-      })
-      .then(() => {
-        navigate("/menu");
-      });
   };
 
   const navigate = useNavigate();
