@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Container, Box, Button, Grid } from "@mui/material";
 import logo from "../../images/logo.png";
 import { useNavigate } from "react-router-dom";
@@ -20,20 +19,18 @@ const Top: React.FC = () => {
                 <img src={logo} alt="ロゴ画像" style={{ width: "400px", marginBottom: "5rem" }} />
                 <Grid container spacing={10} justifyContent="center">
                     <Grid item>
-                        <Button onClick={() => navigate("/login")} color="success" variant="contained">
+                        <Button onClick={() => navigate("/login")} color="success" variant="contained" sx={{ pt: 1, pb: 1, pl: 3, pr: 3 }}>
                             ログイン
                         </Button>
                     </Grid>
                     <Grid item>
-                        <Link to="/create">
-                            <Button color="secondary" variant="contained" style={{ backgroundColor: "#F8F8FB", color: "green" }}>
-                                新規登録
-                            </Button>
-                        </Link>
+                        <Button onClick={() => navigate("/create")} color="success" variant="outlined" sx={{ pt: 1, pb: 1, pl: 3, pr: 3 }}>
+                            新規登録
+                        </Button>
                     </Grid>
                 </Grid>
             </Box>
-        </Container>
+        </Container >
     );
 };
 
