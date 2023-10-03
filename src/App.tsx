@@ -6,28 +6,17 @@ import { BACKEND_BASE_URL } from "./env";
 import { Menu } from "./pages/menu/Menu";
 import { UserEdit } from "./pages/userEdit/UserEdit";
 import { PasswordEdit } from "./pages/passwordEdit/PasswordEdit";
-import { getInvoiceToken } from "./utils/auth";
+import { UserCreate } from "./pages/userCreate/UserCreate";
 
 export const App = () => {
+  axios.defaults.withCredentials = true;
   axios.defaults.baseURL = `${BACKEND_BASE_URL}/api`;
-  // トークン保持してればheadersで渡す
-  axios.interceptors.request.use(
-    (config: any) => {
-      const token = getInvoiceToken();
-      if (token) {
-        config.headers.Authorization = token;
-      }
-      return config;
-    },
-    (error) => {
-      return Promise.reject(error);
-    },
-  );
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" Component={Login} />
+        <Route path="/login" Component={Login} />
+        <Route path="/create" Component={UserCreate} />
         <Route path="/menu" Component={Menu} />
         <Route path="/user_edit" Component={UserEdit} />
         <Route path="/password_edit" Component={PasswordEdit} />
