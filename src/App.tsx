@@ -6,8 +6,9 @@ import { BACKEND_BASE_URL } from "./env";
 import { Menu } from "./pages/menu/Menu";
 import { UserEdit } from "./pages/userEdit/UserEdit";
 import { PasswordEdit } from "./pages/passwordEdit/PasswordEdit";
-import { getInvoiceToken } from "./utils/auth";
 import { UserCreate } from "./pages/userCreate/UserCreate";
+import Top from "./pages/top/Top";
+import { getInvoiceToken } from "./utils/auth";
 
 export const App = () => {
   axios.defaults.baseURL = `${BACKEND_BASE_URL}/api`;
@@ -28,7 +29,8 @@ export const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" Component={Login} />
+        <Route path="/" Component={Top} />
+        <Route path="/login" Component={Login} />
         <Route path="/create" Component={UserCreate} />
         <Route path="/menu" Component={Menu} />
         <Route path="/user_edit" Component={UserEdit} />
