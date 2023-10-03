@@ -15,7 +15,6 @@ const Top: React.FC = () => {
                     justifyContent: "center",
                 }}
             >
-                {/* <img src="./images/logo.png" alt="ロゴ画像" style={{ width: "400px", marginBottom: "5rem" }} /> */}
                 <img src={logo} alt="ロゴ画像" style={{ width: "400px", marginBottom: "5rem" }} />
                 <Grid container spacing={10} justifyContent="center">
                     <Grid item>
