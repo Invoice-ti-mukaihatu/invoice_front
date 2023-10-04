@@ -1,15 +1,20 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { Box, Button, Container, Grid, TextField, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, IconButton, TextField, Typography } from "@mui/material";
 import icon from "../../images/user_icon.png";
 import { useNavigate } from "react-router-dom";
 import { User, initUser } from "../../models/User";
 import axios from "axios";
 import Header from "../header/Header";
 
+interface responseData {
+  image_url: string;
+}
+
 export const UserEdit: React.FC = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<User>(initUser);
+  const [userImage, setUserImage] = useState<string>("");
   const updateUser = async () => {
     axios
       .put<string>(`/users`, user)
@@ -26,7 +31,18 @@ export const UserEdit: React.FC = () => {
       const user = await axios.get<User>(`/users/me`);
       setUser(user.data);
     })();
-  }, [setUser]);
+    (async () => {
+      axios
+        .get<responseData>(`/users/icon`)
+        .then((response) => {
+          const image_url = response.data.image_url;
+          setUserImage(image_url);
+        })
+        .catch((error) => {
+          console.error("Error icon:", error);
+        });
+    })();
+  }, [setUser, setUserImage]);
   return (
     <>
       <Header title="- ユーザー編集 -" logoutButton={true} userIcon={false} />
@@ -61,8 +77,22 @@ export const UserEdit: React.FC = () => {
                   borderRadius: "10%",
                 }}
               >
-                <Grid item xs={2} >
-                  <img src={icon} alt="user_icon" style={{ width: "165px", height: "165px" }} />
+                <Grid item xs={2}>
+                  <IconButton>
+                    {userImage ? (
+                      <img
+                        src={userImage}
+                        alt="user icon"
+                        style={{ width: "165px", height: "165px" }}
+                      />
+                    ) : (
+                      <img
+                        src={icon}
+                        alt="default icon"
+                        style={{ width: "165px", height: "165px" }}
+                      />
+                    )}
+                  </IconButton>
                 </Grid>
                 <Grid item xs={1}></Grid>
                 <Grid item xs={9}>
