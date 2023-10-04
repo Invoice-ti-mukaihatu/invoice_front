@@ -13,7 +13,8 @@ export const Login: React.FC = () => {
 
   const handleLogin = async () => {
     // ログイン情報を送信し、レスポンスを受け取る
-    await axios.post<string>("/login", { email, password })
+    await axios
+      .post<string>("/login", { email, password })
       .then((response) => {
         //cookieにトークンを保存
         document.cookie = `${invoice_token_key}=${response.data}`;
@@ -38,10 +39,6 @@ export const Login: React.FC = () => {
             alignItems: "center",
           }}
         >
-          <Typography component="h1" variant="h4">
-            - ログイン -
-          </Typography>
-
           <Grid item xs={9.5}>
             <Grid
               mt={10}
